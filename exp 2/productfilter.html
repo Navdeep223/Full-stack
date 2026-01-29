@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Filter</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8fafc;
+            padding: 40px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .filter {
+            margin-bottom: 30px;
+        }
+
+        select {
+            padding: 10px 14px;
+            font-size: 16px;
+            border-radius: 6px;
+            border: 2px solid orange;
+        }
+
+        
+        .products {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 800px;
+        }
+
+        
+        .card {
+            padding: 30px;
+            border-radius: 14px;
+            color: white;
+        }
+
+        .card h3 {
+            margin: 0 0 15px;
+            font-size: 24px;
+        }
+
+    
+        .price {
+            background-color: white;
+            color: black;
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .category {
+            font-size: 16px;
+        }
+
+        
+        .electronics {
+            background-color: #2563eb;
+        }
+
+        .clothing {
+            background-color: #60a5fa;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Product Filter</h1>
+
+<div class="filter">
+    Filter by:
+    <select id="category" onchange="filterProducts()">
+        <option value="all">All Products</option>
+        <option value="electronics">Electronics</option>
+        <option value="clothing">Clothing</option>
+    </select>
+</div>
+
+<div class="products">
+
+    <div class="card electronics">
+        <h3>Wireless Headphones</h3>
+        <div class="price">$129.99</div>
+        <div class="category">electronics</div>
+    </div>
+
+    <div class="card clothing">
+        <h3>Cotton T-Shirt</h3>
+        <div class="price">$24.99</div>
+        <div class="category">clothing</div>
+    </div>
+
+    <div class="card electronics">
+        <h3>Bluetooth Speaker</h3>
+        <div class="price">$89.99</div>
+        <div class="category">electronics</div>
+    </div>
+
+    <div class="card clothing">
+        <h3>Denim Jeans</h3>
+        <div class="price">$59.99</div>
+        <div class="category">clothing</div>
+    </div>
+
+</div>
+
+<script>
+    function filterProducts() {
+        let value = document.getElementById("category").value;
+        let cards = document.getElementsByClassName("card");
+
+        for (let i = 0; i < cards.length; i++) {
+            if (value === "all" || cards[i].classList.contains(value)) {
+                cards[i].style.display = "block";
+            } else {
+                cards[i].style.display = "none";
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
