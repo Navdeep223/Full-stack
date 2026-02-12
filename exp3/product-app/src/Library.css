@@ -1,0 +1,59 @@
+body {
+  margin: 0;
+  font-family: Arial;
+  background: linear-gradient(to bottom, #eef2f7, #d9e2ec);
+}
+
+.container {
+  max-width: 700px;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.top-box {
+  background: #f5f7fa;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+input {
+  padding: 12px;
+  margin: 8px 5px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 95%;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.add-btn {
+  background: blue;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.book-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 15px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.remove-btn {
+  background: red;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+}
