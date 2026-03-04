@@ -15,12 +15,12 @@
 // from the Redis configuration file. This allows us to set up our server and establish a connection to Redis
 // before starting to listen for incoming requests.
 import app from './src/app.js';
-import { connectRedis } from './src/config/redis.js';
+// import { connectRedis } from './src/config/redis.js';
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 const startServer = async () => {
-    await connectRedis();
+    // await connectRedis();
 
     app.listen(PORT, () => {
         console.log(`🚀 Server running on port ${PORT}`);
