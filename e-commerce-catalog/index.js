@@ -1,32 +1,25 @@
+import express from "express";
 import mongoose from "mongoose";
 import Product from "./models/Product.js";
 
-async function start() {
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-  await mongoose.connect("mongodb+srv://ns3321960_db_user:FpJzfGGEm1HRJ6Yt@cluster0.bszvldz.mongodb.net/?appName=Cluster0");
+// connect to MongoDB
+mongoose.connect(process.env.MONGO_URI)
+.then(() => console.log("MongoDB Connected"))
+.catch(err => console.log(err));
 
-  console.log("MongoDB Connected");
+// Demo route for experiment
+app.get("/", async (req, res) => {
 
   const product = new Product({
     name: "Premium Headphones",
     category: "Electronics",
-
     variants: [
-      {
-        sku: "HP-BL-001",
-        color: "Black",
-        price: 199.99,
-        stock: 15
-      },
-
-      {
-        sku: "HP-WH-001",
-        color: "White",
-        price: 209.99,
-        stock: 8
-      }
+      { sku: "HP-BL-001", color: "Black", price: 199.99, stock: 15 },
+      { sku: "HP-WH-001", color: "White", price: 209.99, stock: 8 }
     ],
-
     reviews: [
       {
         userId: new mongoose.Types.ObjectId(),
@@ -40,11 +33,7 @@ async function start() {
 
   await product.save();
 
-  console.log("Product Added");
-
   await product.updateStock("HP-BL-001", -2);
-
-  console.log("Stock Updated");
 
   const result = await Product.aggregate([
     { $unwind: "$variants" },
@@ -57,13 +46,16 @@ async function start() {
     }
   ]);
 
-  console.log("Aggregation Result:", result);
-
   const products = await Product.find();
 
-  console.log(JSON.stringify(products, null, 2));
+  res.json({
+    message: "Experiment 2.1.3 Output",
+    aggregation: result,
+    products: products
+  });
 
-  mongoose.connection.close();
-}
+});
 
-start();
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
