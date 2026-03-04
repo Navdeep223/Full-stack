@@ -1,13 +1,15 @@
 import express from 'express';
-import { bookSeatController } from './booking.controller.js';
+import { bookSeatController } from '../services/booking.controller.js';
 
-// Create a new Express router instance to define routes related to booking operations.
 const router = express.Router();
 
-// Define a POST route for booking a seat. The route includes a dynamic parameter ":seatId" which represents 
-// the ID of the seat to be booked.
+// GET route for browser demo
+router.get('/book/:seatId', (req, res) => {
+  const seatId = req.params.seatId;
+  res.json({ message: `Seat ${seatId} booked successfully.` });
+});
+
+// Existing POST API
 router.post('/book/:seatId', bookSeatController);
 
-// Export the router instance as the default export of this module, allowing it to be imported and used 
-// in other parts of the application,
 export default router;
