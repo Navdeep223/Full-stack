@@ -10,6 +10,8 @@ async function startServer() {
 
     await mongoose.connect(process.env.MONGO_URI);
     console.log("MongoDB Connected");
+    await Product.deleteMany({});
+console.log("Old products cleared");
 
     // Insert product only if not exists
     let existing = await Product.findOne({ name: "Premium Headphones" });
